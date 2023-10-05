@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://civf20wpp8uvt"]
+
+[ext_resource type="Script" path="res://Collisions.gd" id="1_267fn"]
+[ext_resource type="PackedScene" uid="uid://jr2mwvyutnlf" path="res://player.tscn" id="1_c0ig0"]
+[ext_resource type="PackedScene" uid="uid://bvol5an0awr7h" path="res://ball.tscn" id="2_s6yny"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_je8s3"]
+size = Vector2(16, 336)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dhrd7"]
+size = Vector2(15, 350)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hepmn"]
+size = Vector2(14, 337.5)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4ady1"]
+size = Vector2(15, 350)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dc1o"]
+size = Vector2(772.5, 20)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_en1xe"]
+size = Vector2(900, 15)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_60bd6"]
+size = Vector2(800, 15)
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(-1, 0)
+script = ExtResource("1_267fn")
+
+[node name="Left" type="Area2D" parent="."]
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Left"]
+position = Vector2(16, 168)
+shape = SubResource("RectangleShape2D_je8s3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Left"]
+position = Vector2(16, 162)
+texture = SubResource("PlaceholderTexture2D_dhrd7")
+
+[node name="Right" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
+position = Vector2(793, 169.25)
+shape = SubResource("RectangleShape2D_hepmn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Right"]
+position = Vector2(795, 164)
+texture = SubResource("PlaceholderTexture2D_4ady1")
+
+[node name="Bottom" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom"]
+position = Vector2(406, 334)
+shape = SubResource("RectangleShape2D_3dc1o")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bottom"]
+position = Vector2(399, 332)
+texture = SubResource("PlaceholderTexture2D_en1xe")
+
+[node name="Top" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
+position = Vector2(406.75, -1)
+shape = SubResource("RectangleShape2D_3dc1o")
+
+[node name="Sprite2D" type="Sprite2D" parent="Top"]
+position = Vector2(398, 1)
+texture = SubResource("PlaceholderTexture2D_60bd6")
+
+[node name="Player2" parent="." instance=ExtResource("1_c0ig0")]
+position = Vector2(520, 162)
+
+[node name="Ball2" parent="." instance=ExtResource("2_s6yny")]
+position = Vector2(408, 155)
+
+[connection signal="body_entered" from="Left" to="." method="_on_left_body_entered"]
+[connection signal="body_entered" from="Right" to="." method="_on_right_body_entered"]
+[connection signal="body_shape_entered" from="Right" to="." method="_on_right_body_shape_entered"]
+[connection signal="body_entered" from="Bottom" to="." method="_on_bottom_body_entered"]
+[connection signal="body_shape_entered" from="Bottom" to="." method="_on_bottom_body_shape_entered"]
+[connection signal="body_entered" from="Top" to="." method="_on_top_body_entered"]
+[connection signal="body_shape_entered" from="Top" to="." method="_on_top_body_shape_entered"]
